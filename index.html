@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Anniversary Music Popup</title>
+<title>Anniversary Music</title>
 <style>
     body {
         margin: 0;
@@ -14,7 +14,7 @@
         text-align: center;
     }
 
-    #startBtn, #moreBtn, #askBtn {
+    #startBtn, #moreBtn {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -30,7 +30,6 @@
 
     #startBtn { background: #ff7bd5; display: block; }
     #moreBtn { background: #ff4fab; display: none; }
-    #askBtn { background: #4a90e2; display: none; }
 
     #message {
         position: absolute;
@@ -62,7 +61,6 @@
 
 <button id="startBtn">สุขสันต์วันครบรอบ 1 เดือนน้า 💗</button>
 <button id="moreBtn">กดอีกๆๆๆๆ 💞</button>
-<button id="askBtn">กดอีกๆๆ</button>
 
 <div id="message"></div>
 
@@ -71,14 +69,11 @@
 <script>
     const startBtn = document.getElementById("startBtn");
     const moreBtn = document.getElementById("moreBtn");
-    const askBtn = document.getElementById("askBtn");
     const message = document.getElementById("message");
     const bgm = document.getElementById("bgm");
 
-    let songStarted = false; // เช็คว่าผู้ใช้เริ่มเพลงแล้วไหม
-
     function spawnEmojis() {
-        const emojis = ["💖","💗","💞","💕","💘","✨","🌸","💓","🌷","🌹"];
+        const emojis = ["💖","💗","💞","💕","💘","✨","🌸","💓"];
         for (let i = 0; i < 80; i++) { 
             let e = document.createElement("div");
             e.classList.add("emoji");
@@ -101,13 +96,15 @@
         setTimeout(() => { moreBtn.style.display = "block"; }, 1800);
     };
 
-    // More button
+    // More button - เล่นเพลงทันที
     moreBtn.onclick = () => {
         message.style.opacity = 0;
         moreBtn.style.display = "none";
-        askBtn.style.display = "block"; // แสดงปุ่มกดอีกๆๆ
 
         document.body.style.background = "#ffd6ec";
+
+        // เล่นเพลงทันที
+        bgm.play();
 
         const texts = [
             "สุขสันต์วันเกิดและวันครบรอบ 1 เดือนนะคะ",
@@ -144,15 +141,6 @@
             }, 2000);
         }
         setTimeout(showNext, 1300);
-    };
-
-    // ปุ่มกดอีกๆๆ
-    askBtn.onclick = () => {
-        if (!songStarted) {
-            bgm.play();
-            songStarted = true;
-            askBtn.style.display = "none"; // ซ่อนปุ่มหลังเล่นเพลงแล้ว
-        }
     };
 </script>
 
